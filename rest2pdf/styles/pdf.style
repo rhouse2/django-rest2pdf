@@ -1,0 +1,32 @@
+{
+   "pageSetup" : {
+      "firstTemplate": "contentsPage"
+   },
+   "pageTemplates": {
+      "contentsPage": {
+         "frames": [
+            ["0cm", "0cm", "100%", "100%"]
+         ],
+         "showHeader" : false,
+         "showFooter" : true
+      }
+   },
+  "styles" : [
+      ["bodytext" , {
+         "alignment": "TA_LEFT"
+         }
+      ],
+      ["heading1", {
+         "fontSize": "150%"
+         }
+      ],
+      ["heading2", {
+         "fontSize": "125%"
+         }
+      ],
+      ["heading3", {
+         "fontSize": "100%"
+         }
+      ]
+   ]
+}

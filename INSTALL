@@ -1,0 +1,30 @@
+INSTALLATION
+============
+
+You have two choices to install.
+
+*  As an app inside a project
+*  As an app within Python's site-packages
+
+To include as a app within a project:
+
+*  Copy the ``rest2pdf`` directory to your Django project directory.
+*  Include ``rest2pdf`` as an INSTALLED_APP.
+*  To your project settings.py file, add:
+
+# List of rst2pdf style sheet paths.
+RST2PDF_STYLESHEET_DIRS = ['proj/rest2pdf/styles',]
+
+Dependencies
+------------
+
+rst2pdf
+ReportLab
+
+Python and Django Versions
+--------------------------
+
+Tested on:
+
+   Python 2.6
+   Django 1.1.1

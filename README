@@ -1,0 +1,18 @@
+Django PDF Creation
+===================
+
+http://docs.djangoproject.com/en/1.1/howto/outputting-pdf/#howto-outputting-pdf
+documents a means of generating PDFs with Django. However, putting text 
+on a page takes a lot of coding effort using the ReportLab API directly.
+
+reStructuredText is now the formatting approach behind a lot of Python
+documentation and tools (e.g. Sphinx) and a library (rst2pdf) now 
+exists to translated reStucturedText to PDF directly, with helpful 
+features such as hyperlinked table of contents automatically generated.
+
+This application uses Django templates to generate a reStructuredText 
+intermediary file from model content, and then rst2pdf converts that 
+text into a pdf file, returning it in an http response object.
+
+The installation requirements and instructions are in the INSTALL file.
+See the docs directory for further information.
