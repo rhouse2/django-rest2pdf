@@ -1,0 +1,9 @@
+.. _releasenotes:
+
+Release Notes
+=============
+
+27 Dec 09 version 0.1
+---------------------
+
+First release.

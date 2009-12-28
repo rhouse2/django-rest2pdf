@@ -2,11 +2,12 @@
 Views to provide downloadable pdf files from a Django project.
 
 """
+from django.conf import settings
 from django.http import HttpResponse
 from django.template import loader, Context
 from cStringIO import StringIO
 from rst2pdf import createpdf
-import settings
+
 
 def rst_to_pdf(request, queryset, paginate_by=None, page=None,
         allow_empty=True, template_name=None, template_loader=loader,

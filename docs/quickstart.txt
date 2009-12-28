@@ -1,0 +1,66 @@
+.. _quickstart:
+
+Quick Start
+===========
+
+To generate PDFs from your own project, you need to:
+
+* Include ``rest2pdf`` as an INSTALLED_APP.
+
+  (This isn't essential as the app has no models and therefore doesn't
+  affect the database. It just makes it easier to find templates and
+  templatetags.)
+
+*  To your project settings.py file, add::
+
+      # List of rst2pdf style sheet paths.
+      RST2PDF_STYLESHEET_DIRS = ['proj/rest2pdf/styles',]
+      
+      
+*  In your urls.py file, add a parameter dictionary and url conf to
+   trigger the view::
+
+      # Keyword argument dictionary for pdf document production
+      document_contents_dict = {
+          "queryset": Article.objects.filter(date_deleted__isnull=True),
+          "template_name": 'template.rst',
+          "template_object_name" : "article",
+          "style_sheets": ['pdf.style'],
+          "extra_context": {
+                  "document_date": Article.objects.filter(
+                          date_deleted__isnull=True).latest('date_modified').date_modified,
+                  "title": "FAQ",
+          }
+      }
+      urlpatterns += patterns('rest2pdf.views',
+          url(r'pdf/$', 'rst_to_pdf', document_contents_dict, name='pdf_download'),
+      )
+
+Should you need additional variables in your template, include them
+within the ``extra_context`` dictionary.
+
+
+*  Modify the template file (``template.rst``) to suit your own data:
+
+   In the ``rest2pdf/templates`` directory, there is an example
+   template for a reStructuredText to PDF document. Copy this file to
+   your ``your_project/templates`` directory and modify it to suit the
+   model content. If you install rest2pdf as an app within your
+   project, then you can modify the template in place.
+   
+   rest2pdf has a simple custom template filter ``rst_heading`` to 
+   mark up section headings in the text. Example usage::
+   
+      {{ variable|rst_heading:"=" }}
+   
+      results in:
+   
+      value of variable
+      =================
+   
+   
+   Most of the simple reStructuredText markup can be achieved in
+   directly in the template, but there are probably some more template
+   filters to write to cover reStructuredText more comprehensively.
+   Submissions are welcome.
+

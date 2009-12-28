@@ -1,0 +1,51 @@
+.. _overview:
+
+Overview
+========
+
+The `Django project documentation
+<http://docs.djangoproject.com/en/1.1/howto/outputting-pdf/#howto-outputting-pdf>`_
+provides a way of generating simple PDFs from the Django web framework.
+It makes use of an excellent PDF library from `Reportlab
+<http://www.reportlab.org/>`_, but using the library primitives to draw
+out PDF pages can be quite laborious.
+
+The problem I faced was retiring an FAQ application. We needed to take
+the web site down, but still retain a user accessible archive version
+of the the information. PDF provides a good archive medium. While there
+are tools to convert the html view of the FAQ site to PDF, it doesn't
+make for an easy-to-read document. What looks OK as a series of
+individual web pages doesn't look good as an html bundle in a PDF
+document. The database content was marked up in reStructuredText, so
+how about a more direct and structured conversion to PDF with minimal
+effort? All the searching I did on this subject only returned
+information on rendering reStructuredText to html in Django, not to
+PDF.
+
+The Sphinx documentation tool has a default PDF production from
+reStructuredText through LaTex. There is a direct reStructuredText to
+PDF library (`rst2pdf <http://code.google.com/p/rst2pdf/>`_ also based
+on ReportLab) from Roberto Alsina, which works as an extension with
+Sphinx. The templates and styles rst2pdf provides take the hard work
+out of document layout. rst2pdf seemed to provide all the tools and it
+wasn't difficult to get it working with Django.
+
+In outline, my solution was to create a reStructuredText file using
+Django templates to define the document structure and layout (into
+which the FAQ content reStructureText was added). The next step then
+processed the rendered template with rst2pdf to produce the the styled
+PDF document, with a hyperlinked table of contents automatically added.
+
+As my requirement was a "one off", I wrote the functionality as a
+Django view, returning the PDF file in an http response. On my MacBook,
+the FAQ of 200 articles took about 15 sec to return a 70 page PDF. For
+production rendering of PDFs, this processing on demand approach might
+not be fast enough.
+
+One simple template filter (``rst_heading``) is included to add
+underscores to text for marking up headings in the text.
+
+The app is called rest2pdf to avoid confusion with the rst2pdf library.
+It has nothing to do with `Representational State Transfer (REST)
+<http://en.wikipedia.org/wiki/Representational_State_Transfer>`_
+

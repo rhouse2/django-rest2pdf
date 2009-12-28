@@ -1,0 +1,7 @@
+.. _faq:
+
+FAQ
+===
+
+Please ask questions, so that they can be answered here for others'
+benefit.

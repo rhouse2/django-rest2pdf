@@ -1,0 +1,39 @@
+.. _developer:
+
+Developer Notes
+===============
+
+The app does not have any models and does not use the contrib admin
+interface. The key elements of this app are in:
+
+   views.py
+
+      Does the rendering.
+      
+   templates/template.rst
+   
+      Specifies the document layout
+      
+   templatetags/rest2pdf_tags.py
+   
+      Custom template filter for section headings
+      
+   styles/pdf.style
+   
+      A rst2pdf stylesheet to size fonts and define PDF page headings 
+      and footers.
+
+The view function that generates the PDF document has a similar
+interface to that of `Django generic view
+<http://docs.djangoproject.com/en/dev/ref/generic-views/>`_. If you are
+already using generic views, this simplifies use.
+
+Performance
+-----------
+
+For PDF documents more than 10 or so pages, it would be faster to have
+the document pre-produced (e.g. via a cron job) and saved as a file
+with the static media.
+
+
+
