@@ -28,7 +28,7 @@
 
 {% if articles %}
 {% for article in articles %}
-{{ article.title|rst_heading:"-" }}
+{{ article.question|rst_heading:"-" }}
 
 **Category:** {{ article.category }}
 
@@ -36,7 +36,7 @@
 
 **Posted:** {{ article.date_posted|date:"d-M-y" }}, Database ID: {{ article.id }}
 
-{{ article.content }}
+{{ article.answer }}
 
 {% if article.resources.all %}
 **Resources:**
