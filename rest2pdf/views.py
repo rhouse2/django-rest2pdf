@@ -44,9 +44,10 @@ def rst_to_pdf(request, queryset, paginate_by=None, page=None,
         ''.join(['attachment; filename=', file_name]))
 
     # Context
-    if extra_context is None: extra_context = {}
+    if extra_context is None: 
+        extra_context = {}
     queryset = queryset._clone()
-    c = Context({'articles': queryset,
+    c = Context({template_object_name: queryset,
         })
     # Add extra _context items
     for key, value in extra_context.items():
