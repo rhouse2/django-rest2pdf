@@ -3,7 +3,14 @@ django-rest2pdf changelog
 =========================
 
 
-Version 0.1, 27 December 2009:
------------------------------
+Version 0.1.1, 11 January 2009:
+-------------------------------
 
-* Added to Google Code.
+*  Modified view.py to allow generic template object names.
+*  Changed name of `template.rst` to `example_template.rst`.
+
+Version 0.1.0, 27 December 2009:
+------------------------------
+
+*  Added to Google Code.
+

@@ -12,7 +12,7 @@ from rst2pdf import createpdf
 def rst_to_pdf(request, queryset, paginate_by=None, page=None,
         allow_empty=True, template_name=None, template_loader=loader,
         extra_context=None, context_processors=None, 
-        template_object_name='object', mimetype='text/pdf', 
+        template_object_name='objects', mimetype='text/pdf', 
         style_sheets=['pdf.style'], file_name='file.pdf'):
     """View for rendering data to a pdf via reStructured Text.
     Uses the same parameters as 

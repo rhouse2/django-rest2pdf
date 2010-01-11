@@ -20,7 +20,7 @@ from fakeapp.models import Faq
 
 document_contents_dict = {
     "queryset": QuerySet().none(),
-    "template_name": 'template.rst',
+    "template_name": 'example_template.rst',
     "template_object_name" : "articles",
     "style_sheets": ['pdf.style'],
     "extra_context": {

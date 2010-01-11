@@ -28,6 +28,9 @@
 
 {% if articles %}
 {% for article in articles %}
+.. This is a anchor tag for use in creating an index.
+..  _{{ article.question }}:
+
 {{ article.question|rst_heading:"-" }}
 
 **Category:** {{ article.category }}
@@ -38,13 +41,13 @@
 
 {{ article.answer }}
 
-{% if article.resources.all %}
-**Resources:**
+{% endfor %}
 
-{% for r in article.resources.all %}{{ r.name }} `<{{ r.link }}>`__
-{% endfor %}
-{% endif %}
-{% endfor %}
+{{ "Index"|rst_heading:"-" }}
+
+If you use django-tagging with your models, you could add an index of tags,
+with links to document content.
+
 {% else %}
 No articles.
 {%endif %}
