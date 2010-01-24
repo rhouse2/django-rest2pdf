@@ -18,7 +18,6 @@ class Faq(models.Model):
     
     class Meta:
         ordering = []
-        verbose_name, verbose_name_plural = "", "s"
 
     def __unicode__(self):
         return u"Faq"

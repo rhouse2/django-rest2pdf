@@ -3,6 +3,11 @@
 Release Notes
 =============
 
+24 Jan 10 version 0.1.2
+-----------------------
+
+Added more content for tests to produce example.pdf
+
 27 Dec 09 version 0.1
 ---------------------
 

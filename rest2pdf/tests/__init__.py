@@ -32,9 +32,10 @@ document_contents_dict = {
 }
 
 class TestRest2pdf(TestCase):
-    
+    fixtures = ['fakeapp.json',] 
     def setUp(self):
         self.old_INSTALLED_APPS = settings.INSTALLED_APPS
+        """
         settings.INSTALLED_APPS = (
             # 'django.contrib.auth',
             # 'django.contrib.contenttypes',
@@ -42,6 +43,7 @@ class TestRest2pdf(TestCase):
             'rest2pdf.tests.fakeapp',
         )
         load_app('rest2pdf.tests.fakeapp')
+        
         call_command('syncdb', verbosity=0, interactive=False) #Create tables for fakeapp
         faq = Faq(question="What is rest2pdf?", 
             answer="A converter of text in a Django databse to pdf \
@@ -62,6 +64,7 @@ class TestRest2pdf(TestCase):
             tags="test, command"
             )
         faq.save()
+        """
         document_contents_dict['queryset'] = Faq.objects.all()
 
     def tearDown(self):

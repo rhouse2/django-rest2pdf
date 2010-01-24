@@ -21,7 +21,7 @@ MANAGERS = ADMINS
 test_engine = os.environ.get("REST2PDF_TEST_ENGINE", "sqlite3")
 
 DATABASE_ENGINE = test_engine
-DATABASE_NAME = os.environ.get("REST2PDF_DATABASE_NAME", "rest2pdf_test")
+DATABASE_NAME = os.environ.get("REST2PDF_DATABASE_NAME", "rest2pdf_test.db")
 DATABASE_USER = os.environ.get("REST2PDF_DATABASE_USER", "")
 DATABASE_PASSWORD = os.environ.get("REST2PDF_DATABASE_PASSWORD", "")
 DATABASE_HOST = os.environ.get("REST2PDF_DATABASE_HOST", "localhost")
@@ -82,7 +82,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
-ROOT_URLCONF = 'testapp.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -91,12 +91,13 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    # 'django.contrib.auth',
-    # 'django.contrib.contenttypes',
-    # 'django.contrib.sessions',
-    # 'django.contrib.sites',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.admin',
     'rest2pdf',
-    # 'rest2pdf.tests.fakeapp',
+    'fakeapp',
 )
 
 # List of rst2pdf style sheet paths.

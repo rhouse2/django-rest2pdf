@@ -35,5 +35,12 @@ For PDF documents more than 10 or so pages, it would be faster to have
 the document pre-produced (e.g. via a cron job) and saved as a file
 with the static media.
 
+Testing
+-------
+
+rest2pdf contains a tests directory. Running ./runtests.py will create a 
+test database containing some FAQ content and generate an example.pdf 
+document.
+
 
 

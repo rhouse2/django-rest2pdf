@@ -39,7 +39,7 @@
 
 **Posted:** {{ article.date_posted|date:"d-M-y" }}, Database ID: {{ article.id }}
 
-{{ article.answer }}
+{{ article.answer|safe }}
 
 {% endfor %}
 
