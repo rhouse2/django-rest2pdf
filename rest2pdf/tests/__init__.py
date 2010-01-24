@@ -6,6 +6,8 @@ __init__.py
 Test for rest2pdf.
 """
 import sys
+import os
+DIRNAME = os.path.dirname(__file__)
 
 from django.test import TestCase
 from django.conf import settings
@@ -42,14 +44,20 @@ class TestRest2pdf(TestCase):
         load_app('rest2pdf.tests.fakeapp')
         call_command('syncdb', verbosity=0, interactive=False) #Create tables for fakeapp
         faq = Faq(question="What is rest2pdf?", 
-            answer="A converter of text in a Django databse to pdf.",
+            answer="A converter of text in a Django databse to pdf \
+            using reStructuredText in a template for laying out the \
+            document.",
             category="overview",
             tags="rest2pdf")
         faq.save()
         faq = Faq(question="How do you run the tests?",
-            answer="Make sure django-rest2pdf is on your PYTHONPATH, \
-            and the run this command from the command line:\
-            **django-admin.py test --settings='rest2pdf.tests.testsettings'** ",
+            answer = 
+            "If django-rest2pdf is on your PYTHONPATH, \
+            then run this command from the command line: \
+            **django-admin.py test --settings='rest2pdf.tests.testsettings'** \
+            If you haven't got django-rest2pdf on your PYTHONPATH, \
+            then run this command from the tests directory: \
+            **python runtests.py**",
             category="testing",
             tags="test, command"
             )
@@ -69,6 +77,6 @@ class TestRest2pdf(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         # Check the reponse looks like a pdf file.
         self.failUnlessEqual(response._get_content()[:4], '%PDF')
-        f = open('rest2pdf/tests/example.pdf', 'w')
+        f = open(os.path.join(DIRNAME,'example.pdf'), 'w')
         f.write(response._get_content())
 

@@ -1,4 +1,13 @@
 # Django settings for testapp project.
+import os, sys
+TEST_DIR = os.path.dirname(os.path.abspath(__file__))
+APP_DIR, TESTS = os.path.split(TEST_DIR)
+
+#Ensure project is on system path.
+sys.path.insert(0, TEST_DIR)
+sys.path.append(APP_DIR)
+
+DEFAULT_CHARSET = 'utf-8'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -9,12 +18,22 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'sqlite3'    # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'tests/test.db'  # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+test_engine = os.environ.get("REST2PDF_TEST_ENGINE", "sqlite3")
+
+DATABASE_ENGINE = test_engine
+DATABASE_NAME = os.environ.get("REST2PDF_DATABASE_NAME", "rest2pdf_test")
+DATABASE_USER = os.environ.get("REST2PDF_DATABASE_USER", "")
+DATABASE_PASSWORD = os.environ.get("REST2PDF_DATABASE_PASSWORD", "")
+DATABASE_HOST = os.environ.get("REST2PDF_DATABASE_HOST", "localhost")
+
+if test_engine == "sqlite":
+    DATABASE_NAME = os.path.join(TEST_DIR, 'rest2pdf_test.db')
+    DATABASE_HOST = ""
+elif test_engine == "mysql":
+    DATABASE_PORT = os.environ.get("REST2PDF_DATABASE_PORT", 3306)
+elif test_engine == "postgresql_psycopg2":
+    DATABASE_PORT = os.environ.get("REST2PDF_DATABASE_PORT", 5432)
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -81,4 +100,4 @@ INSTALLED_APPS = (
 )
 
 # List of rst2pdf style sheet paths.
-RST2PDF_STYLESHEET_DIRS = ['rest2pdf/styles',]
+RST2PDF_STYLESHEET_DIRS = [os.path.join(APP_DIR,'styles'),]
