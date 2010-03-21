@@ -11,32 +11,32 @@ from rst2pdf import createpdf
 
 def rst_to_pdf(request, queryset, paginate_by=None, page=None,
         allow_empty=True, template_name=None, template_loader=loader,
-        extra_context=None, context_processors=None, 
-        template_object_name='objects', mimetype='text/pdf', 
+        extra_context=None, context_processors=None,
+        template_object_name='objects', mimetype='text/pdf',
         style_sheets=['pdf.style'], file_name='file.pdf'):
     """View for rendering data to a pdf via reStructured Text.
-    Uses the same parameters as 
-    django.views.generic.list_datail.object_list, 
+    Uses the same parameters as
+    django.views.generic.list_datail.object_list,
     adding:
-    
+
         style_sheets, a list of rst2pdf stylesheets,
-        
+
         file_name, a default download file name.
-    
-    
+
+
     **Template:**
-    
+
     ``template.rst``
-    
+
     **Context:**
-    
+
     Context is generatated and used internally in the view to produce
     the pdf file.
-    
+
     **Response:**
-    
+
     An HttpResponse containing a pdf file.
-    
+
     """
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(mimetype=mimetype)
@@ -44,7 +44,7 @@ def rst_to_pdf(request, queryset, paginate_by=None, page=None,
         ''.join(['attachment; filename=', file_name]))
 
     # Context
-    if extra_context is None: 
+    if extra_context is None:
         extra_context = {}
     queryset = queryset._clone()
     c = Context({template_object_name: queryset,
@@ -58,7 +58,7 @@ def rst_to_pdf(request, queryset, paginate_by=None, page=None,
     # Get template
     if not template_name:
         model = queryset.model
-        template_name = "%s/%s_list.rst" % (model._meta.app_label, 
+        template_name = "%s/%s_list.rst" % (model._meta.app_label,
                 model._meta.object_name.lower())
     t = template_loader.get_template(template_name)
     # Check for any settings.
