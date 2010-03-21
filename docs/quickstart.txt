@@ -35,13 +35,12 @@ To generate PDFs from your own project, you need to:
       urlpatterns += patterns('rest2pdf.views',
           url(r'pdf/$', 'rst_to_pdf', document_contents_dict, name='pdf_download'),
       )
-
 Should you need additional variables in your template, include them
 within the ``extra_context`` dictionary.
-
-
+If you wish to pass additional arguments to ``rst2pdf.createpdf.RstToPdf()``,
+place them in the ``rst_to_pdf_kwargs`` dictionary; see the documentation for
+``rst_to_pdf`` for a list of arguments available.
 *  Modify the template file (``template.rst``) to suit your own data:
-
    In the ``rest2pdf/templates`` directory, there is an example
    template for a reStructuredText to PDF document. Copy this file to
    your ``your_project/templates`` directory and modify it to suit the

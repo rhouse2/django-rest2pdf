@@ -7,13 +7,16 @@ from django.http import HttpResponse
 from django.template import loader, Context
 from cStringIO import StringIO
 from rst2pdf import createpdf
-
-
+DEFAULT_RST2PDF_ARGUMENTS = {
+    'breaklevel': 0,
+    'breakside': 'any',
+    }
 def rst_to_pdf(request, queryset, paginate_by=None, page=None,
         allow_empty=True, template_name=None, template_loader=loader,
         extra_context=None, context_processors=None,
         template_object_name='objects', mimetype='text/pdf',
-        style_sheets=['pdf.style'], file_name='file.pdf'):
+        style_sheets=['pdf.style'], file_name='file.pdf',
+        rst_to_pdf_kwargs={}):
     """View for rendering data to a pdf via reStructured Text.
     Uses the same parameters as
     django.views.generic.list_datail.object_list,
@@ -65,12 +68,20 @@ def rst_to_pdf(request, queryset, paginate_by=None, page=None,
     style_path = getattr(settings, 'RST2PDF_STYLESHEET_DIRS', [])
     # Create in-memory buffer for file
     string_buffer = StringIO()
-    createpdf.RstToPdf(
-        stylesheets=style_sheets,
-        breaklevel=0,
-        breakside='any',
-        style_path = style_path,
-        ).createPdf(
+
+    #
+    # Build arguments for createpdf.RstToPdf()
+    #
+    kwargs = {}
+    # First, default arguments
+    kwargs.update(DEFAULT_RST2PDF_ARGUMENTS)
+    kwargs['style_path'] = style_path
+    # Next, arguments passed to the view
+    kwargs['stylesheets'] = style_sheets
+    # Finally, ``rst_to_pdf_kwargs``, so that it is authoritative
+    kwargs.update(rst_to_pdf_kwargs)
+
+    createpdf.RstToPdf(**kwargs).createPdf(
             text=t.render(c), output=string_buffer, compressed=True,
             )
     response.write(unicode(string_buffer.getvalue(), 'utf-8', 'ignore'))
