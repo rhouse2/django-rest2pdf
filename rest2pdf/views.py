@@ -62,17 +62,14 @@ def rst_to_pdf(request, queryset, paginate_by=None, page=None,
                 model._meta.object_name.lower())
     t = template_loader.get_template(template_name)
     # Check for any settings.
-    try:
-        settings.RST2PDF_STYLESHEET_DIRS
-    except AttributeError:
-        settings.RST2PDF_STYLESHEET_DIRS = []
+    style_path = getattr(settings, 'RST2PDF_STYLESHEET_DIRS', [])
     # Create in-memory buffer for file
     string_buffer = StringIO()
     createpdf.RstToPdf(
         stylesheets=style_sheets,
         breaklevel=0,
         breakside='any',
-        style_path = settings.RST2PDF_STYLESHEET_DIRS,
+        style_path = style_path,
         ).createPdf(
             text=t.render(c), output=string_buffer, compressed=True,
             )
