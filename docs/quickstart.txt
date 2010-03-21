@@ -15,8 +15,8 @@ To generate PDFs from your own project, you need to:
 
       # List of rst2pdf style sheet paths.
       RST2PDF_STYLESHEET_DIRS = ['proj/rest2pdf/styles',]
-      
-      
+
+
 *  In your urls.py file, add a parameter dictionary and url conf to
    trigger the view::
 
@@ -47,18 +47,18 @@ within the ``extra_context`` dictionary.
    your ``your_project/templates`` directory and modify it to suit the
    model content. If you install rest2pdf as an app within your
    project, then you can modify the template in place.
-   
-   rest2pdf has a simple custom template filter ``rst_heading`` to 
+
+   rest2pdf has a simple custom template filter ``rst_heading`` to
    mark up section headings in the text. Example usage::
-   
+
       {{ variable|rst_heading:"=" }}
-   
+
       results in:
-   
+
       value of variable
       =================
-   
-   
+
+
    Most of the simple reStructuredText markup can be achieved in
    directly in the template, but there are probably some more template
    filters to write to cover reStructuredText more comprehensively.
